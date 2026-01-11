@@ -26,12 +26,76 @@ var data: ChatMessageData:
 		_build_ui()
 
 
+@onready var _draggable_separator = %DraggableSeparator
+@onready var _messages_panel = %MessagesPanel
+
 func _ready() -> void:
 	Store.chats_list_item_selected.connect(_on_chats_list_item_selected)
 	_model_btn.pressed.connect(_on_model_btn_pressed)
 	_more_menu_btn.pressed.connect(_on_more_menu_pressed)
 	_back_btn.pressed.connect(_on_back_pressed)
 	_model_panel.model_selected.connect(_on_model_selected)
+	
+	# Configure Draggable Separator
+	_draggable_separator.target_control = _messages_panel
+	_draggable_separator.min_height = 200.0
+	_draggable_separator.max_height = 1500.0
+	_draggable_separator.height_changed.connect(_on_panel_height_changed)
+	
+	visibility_changed.connect(_on_visibility_changed)
+	_load_character_model()
+
+func _on_visibility_changed():
+	if visible:
+		_load_character_model()
+
+func _load_character_model():
+	var char_id = Store.app_data.current_character_id
+	var character: CharacterData
+	
+	# Find character by ID
+	for c in Store.app_data.characters:
+		if c.id == char_id:
+			character = c
+			break
+	
+	if not character:
+		return
+
+	# Load 3D Model
+	print("Loading character model for: ", character.name)
+	var placeholder = %ModelPlaceholder
+	
+	# Clear existing
+	for child in placeholder.get_children():
+		child.queue_free()
+	
+	if character.model_path != "":
+		if FileAccess.file_exists(character.model_path):
+			var model_scene = load(character.model_path)
+			if model_scene:
+				var instance = model_scene.instantiate()
+				placeholder.add_child(instance)
+				print("Model loaded from: ", character.model_path)
+			else:
+				print("Failed to load model resource.")
+		else:
+			print("Model file not found: ", character.model_path)
+	else:
+		# Fallback to Cube if you want, or just nothing.
+		# But the scene has a default TempCube. 
+		# If character has NO model path, maybe we should KEEP the temp cube?
+		# Or if we want to support "No Model", we should clear it.
+		# For now, let's just leave the TempCube if no model path is set, OR create a default cube.
+		
+		# Re-create temp cube if needed
+		var box = MeshInstance3D.new()
+		box.mesh = BoxMesh.new()
+		box.mesh.size = Vector3(1, 2, 1)
+		placeholder.add_child(box)
+
+func _on_panel_height_changed(new_height: float):
+	_messages_panel.custom_minimum_size.y = new_height
 
 
 func _on_model_btn_pressed():
@@ -167,12 +231,19 @@ func _call_ai_api(model_config: ModelConfig, api: APIEndpoint, user_message: Str
 	var model_name = model_config.api_model_name
 	
 	# 构建请求体
+	var system_content = "你是" + data.contact.name + "，请用友好、自然的方式回复。"
+	
+	# Try to use Character System Prompt
+	var char = _get_current_active_character()
+	if char and char.system_prompt != "":
+		system_content = char.system_prompt
+	
 	var request_body = {
 		"model": model_name,
 		"messages": [
 			{
 				"role": "system",
-				"content": "你是" + data.contact.name + "，请用友好、自然的方式回复。"
+				"content": system_content
 			},
 			{
 				"role": "user",
@@ -227,6 +298,13 @@ func _call_ai_api(model_config: ModelConfig, api: APIEndpoint, user_message: Str
 	else:
 		print("响应格式错误")
 		return ""
+
+func _get_current_active_character() -> CharacterData:
+	var char_id = Store.app_data.current_character_id
+	for c in Store.app_data.characters:
+		if c.id == char_id:
+			return c
+	return null
 
 
 func _instance_message(msg_data: MessageData):

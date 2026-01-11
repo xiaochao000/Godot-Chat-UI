@@ -128,8 +128,31 @@ func seed_app_data() -> AppData:
 	
 	# 初始化新的模型配置
 	_init_model_configs(app_data)
+	
+	# 初始化虚拟角色
+	app_data.characters = seed_characters()
+	if not app_data.characters.is_empty():
+		app_data.current_character_id = app_data.characters[0].id
 
 	return app_data
+
+func seed_characters() -> Array[CharacterData]:
+	var chars: Array[CharacterData] = []
+	
+	var mika = CharacterData.new()
+	mika.name = "Mika"
+	mika.avatar = avatars.female1
+	mika.system_prompt = "You are Mika, a cool and mysterious girl."
+	mika.selected_model = "DeepSeek-V3"
+	chars.append(mika)
+	
+	var supporter = CharacterData.new()
+	supporter.name = "Supporter"
+	supporter.avatar = avatars.male1
+	supporter.system_prompt = "You are a helpful supporter."
+	chars.append(supporter)
+	
+	return chars
 
 
 func seed_my_contact() -> ContactData:

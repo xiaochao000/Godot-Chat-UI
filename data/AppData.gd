@@ -9,3 +9,5 @@ var contacts = {}
 var chats_data: ChatsData
 var ai_configs: Array[AIConfig] = []
 var model_configs: Array[ModelConfig] = []  # 新的按模型分类的配置
+var characters: Array[CharacterData] = []
+var current_character_id: String = ""

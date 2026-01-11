@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://char_management"]
+
+[ext_resource type="Script" path="res://pages/characters/CharacterManagement.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://char_edit_dialog" path="res://pages/characters/CharacterEditDialog.tscn" id="2_dialog"]
+
+[node name="CharacterManagement" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="BackBtn" type="Button" parent="VBoxContainer/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+text = "<"
+
+[node name="Title" type="Label" parent="VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+text = "角色管理"
+
+[node name="AddBtn" type="Button" parent="VBoxContainer/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+text = "新建"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="CharacterEditDialog" parent="." instance=ExtResource("2_dialog")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
