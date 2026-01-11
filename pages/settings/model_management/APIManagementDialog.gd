@@ -52,17 +52,20 @@ func _on_add_api():
 	_edit_dialog.open(new_api)
 	await _edit_dialog.saved
 	refresh_api_list()
+	Store.save_settings()
 
 func _on_select_api(index: int):
 	current_model.selected_api_index = index
 	print("已选择API: ", current_model.api_endpoints[index].name)
 	refresh_api_list()
+	Store.save_settings()
 
 func _on_edit_api(index: int):
 	var api = current_model.api_endpoints[index]
 	_edit_dialog.open(api)
 	await _edit_dialog.saved
 	refresh_api_list()
+	Store.save_settings()
 
 func _on_delete_api(index: int):
 	current_model.api_endpoints.remove_at(index)
@@ -70,6 +73,7 @@ func _on_delete_api(index: int):
 	if current_model.selected_api_index >= current_model.api_endpoints.size():
 		current_model.selected_api_index = current_model.api_endpoints.size() - 1
 	refresh_api_list()
+	Store.save_settings()
 
 func _on_test_api(index: int):
 	var api = current_model.api_endpoints[index]
@@ -108,3 +112,4 @@ func _on_test_api(index: int):
 	
 	api.last_check_time = Time.get_unix_time_from_system()
 	refresh_api_list()
+	Store.save_settings()

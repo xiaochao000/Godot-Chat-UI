@@ -13,7 +13,10 @@ var api_config_item_scene = preload("res://pages/settings/ai_management/APIConfi
 func _ready():
 	_back_btn.pressed.connect(func(): back_pressed.emit())
 	_add_btn.pressed.connect(_on_add_pressed)
-	_dialog.save_pressed.connect(func(_config): refresh_list())
+	_dialog.save_pressed.connect(func(_config): 
+		refresh_list()
+		Store.save_settings()
+	)
 	refresh_list()
 
 func refresh_list():
@@ -31,6 +34,7 @@ func refresh_list():
 func _on_add_pressed():
 	var new_config = AIConfig.new(str(Time.get_unix_time_from_system()), "Custom", "", "")
 	Store.app_data.ai_configs.append(new_config)
+	Store.save_settings()
 	_dialog.open(new_config)
 
 func _on_edit_requested(config: AIConfig):
@@ -39,6 +43,7 @@ func _on_edit_requested(config: AIConfig):
 func _on_delete_requested(config: AIConfig):
 	Store.app_data.ai_configs.erase(config)
 	refresh_list()
+	Store.save_settings()
 
 func _on_test_requested(config: AIConfig):
 	print("测试连接: ", config.provider_name)
@@ -89,3 +94,4 @@ func _on_test_requested(config: AIConfig):
 		print("响应: ", body)
 	
 	refresh_list()
+	Store.save_settings()
