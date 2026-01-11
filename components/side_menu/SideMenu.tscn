@@ -1,0 +1,213 @@
+[gd_scene load_steps=14 format=3 uid="uid://rcuv55xr08du"]
+
+[ext_resource type="StyleBox" uid="uid://bjoa0j5wb5g66" path="res://assets/styles/empty.tres" id="1_d4ds0"]
+[ext_resource type="Texture2D" uid="uid://4wn3jpfekvqf" path="res://assets/icons/chat.svg" id="1_ftsnh"]
+[ext_resource type="Script" path="res://components/side_menu/SideMenu.gd" id="1_hamds"]
+[ext_resource type="ButtonGroup" uid="uid://cnrf3bqk2c6fv" path="res://components/side_menu/side_menu_button_group.tres" id="3_1e63c"]
+[ext_resource type="Texture2D" uid="uid://cwna7ge6rq01t" path="res://assets/icons/phone.svg" id="4_oxnx5"]
+[ext_resource type="Texture2D" uid="uid://b6anchsm3g3xd" path="res://assets/icons/status.svg" id="5_bvgyr"]
+[ext_resource type="Texture2D" uid="uid://cxxapu8l2n5xr" path="res://assets/icons/setting.svg" id="7_mmnia"]
+[ext_resource type="PackedScene" uid="uid://cii7bqbvywolw" path="res://components/selected_button_indicator/SelectedButtonIndicator.tscn" id="7_w6f01"]
+[ext_resource type="Shader" path="res://assets/shaders/circle.gdshader" id="8_45coo"]
+[ext_resource type="Texture2D" uid="uid://c87p5oxmyu661" path="res://assets/avatars/my_avatar.jpeg" id="9_3pqj5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7d6qc"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.12549, 0.12549, 0.12549, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3swb2"]
+bg_color = Color(0.176471, 0.176471, 0.176471, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4w73n"]
+shader = ExtResource("8_45coo")
+
+[node name="SideMenu" type="PanelContainer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7d6qc")
+script = ExtResource("1_hamds")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="ChatsButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "聊天"
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("1_d4ds0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3swb2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3swb2")
+theme_override_styles/disabled = ExtResource("1_d4ds0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3swb2")
+toggle_mode = true
+keep_pressed_outside = true
+button_group = ExtResource("3_1e63c")
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ChatsButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ftsnh")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CallsButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "通话"
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("1_d4ds0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3swb2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3swb2")
+theme_override_styles/disabled = ExtResource("1_d4ds0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3swb2")
+toggle_mode = true
+keep_pressed_outside = true
+button_group = ExtResource("3_1e63c")
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/CallsButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_oxnx5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "状态"
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("1_d4ds0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3swb2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3swb2")
+theme_override_styles/disabled = ExtResource("1_d4ds0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3swb2")
+toggle_mode = true
+keep_pressed_outside = true
+button_group = ExtResource("3_1e63c")
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/StatusButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_bvgyr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SettingsButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "设置"
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("1_d4ds0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3swb2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3swb2")
+theme_override_styles/disabled = ExtResource("1_d4ds0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3swb2")
+keep_pressed_outside = true
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/SettingsButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_mmnia")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ProfileButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "个人资料"
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("1_d4ds0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3swb2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3swb2")
+theme_override_styles/disabled = ExtResource("1_d4ds0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3swb2")
+keep_pressed_outside = true
+
+[node name="MyAvatar" type="TextureRect" parent="HBoxContainer/ProfileButton"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_4w73n")
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_3pqj5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectedButtonIndicator" parent="." instance=ExtResource("7_w6f01")]
+unique_name_in_owner = true

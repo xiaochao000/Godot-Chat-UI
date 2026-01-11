@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6jhyw2j7n2kx"]
+
+[ext_resource type="Script" path="res://pages/settings/ai_management/APIConfigItem.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+content_margin_left = 32.0
+content_margin_top = 24.0
+content_margin_right = 32.0
+content_margin_bottom = 24.0
+bg_color = Color(0.18, 0.18, 0.18, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="APIConfigItem" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 180)
+offset_right = 1016.0
+offset_bottom = 180.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+script = ExtResource("1_script")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="StatusIcon" type="ColorRect" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+size_flags_vertical = 1
+color = Color(1, 1, 1, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="ProviderName" type="Label" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Provider Name"
+
+[node name="BaseURL" type="Label" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.53, 0.53, 0.53, 1)
+theme_override_font_sizes/font_size = 20
+text = "https://api.example.com/v1"
+
+[node name="Actions" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TestBtn" type="Button" parent="HBoxContainer/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "测试"
+
+[node name="EditBtn" type="Button" parent="HBoxContainer/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "编辑"
+
+[node name="DeleteBtn" type="Button" parent="HBoxContainer/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 70)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 24
+text = "删除"

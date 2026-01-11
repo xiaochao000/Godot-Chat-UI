@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://df6p3j7f5y8v3"]
+
+[ext_resource type="Script" path="res://pages/settings/ai_management/AIManagement.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://chn0vrpw0i4y2" path="res://assets/fonts/Roboto/Roboto-Bold.ttf" id="2_font"]
+[ext_resource type="PackedScene" uid="uid://b8yv3h5j7n2kx" path="res://pages/settings/ai_management/APIEditDialog.tscn" id="3_dialog"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
+content_margin_left = 32.0
+content_margin_top = 16.0
+content_margin_right = 32.0
+content_margin_bottom = 16.0
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+border_width_bottom = 1
+border_color = Color(0.109804, 0.109804, 0.109804, 1)
+
+[node name="AIManagement" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_header")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Header"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="BackBtn" type="Button" parent="VBoxContainer/Header/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "<"
+flat = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Header/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 42
+text = "AI 账号管理"
+vertical_alignment = 1
+
+[node name="AddBtn" type="Button" parent="VBoxContainer/Header/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "+"
+flat = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="APIList" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="APIEditDialog" parent="." instance=ExtResource("3_dialog")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1

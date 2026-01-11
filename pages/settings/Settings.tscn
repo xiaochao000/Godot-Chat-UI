@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6jhyw2j7n2kx"]
+
+[ext_resource type="Script" path="res://pages/settings/Settings.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://chn0vrpw0i4y2" path="res://assets/fonts/Roboto/Roboto-Bold.ttf" id="2_font"]
+[ext_resource type="StyleBox" uid="uid://vge6jnx62bo6" path="res://pages/chats/chat_messages/message/message_received_stylebox.tres" id="3_style"]
+[ext_resource type="PackedScene" uid="uid://model_mgmt_uid" path="res://pages/settings/model_management/ModelManagement.tscn" id="4_ai_management"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+border_width_bottom = 1
+border_color = Color(0.109804, 0.109804, 0.109804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_item"]
+content_margin_left = 32.0
+content_margin_top = 24.0
+content_margin_right = 32.0
+content_margin_bottom = 24.0
+bg_color = Color(0.12549, 0.12549, 0.12549, 1)
+border_width_bottom = 1
+border_color = Color(0.109804, 0.109804, 0.109804, 1)
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_header")
+
+[node name="Label" type="Label" parent="VBoxContainer/Header"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 48
+text = "设置"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemsContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="AIManagementBtn" type="Button" parent="VBoxContainer/ScrollContainer/ItemsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_item")
+theme_override_styles/hover = SubResource("StyleBoxFlat_item")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_item")
+alignment = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/ItemsContainer/AIManagementBtn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/ItemsContainer/AIManagementBtn/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 36
+text = "AI 功能管理"
+vertical_alignment = 1
+
+[node name="Arrow" type="Label" parent="VBoxContainer/ScrollContainer/ItemsContainer/AIManagementBtn/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_font_sizes/font_size = 36
+text = ">"
+vertical_alignment = 1
+
+[node name="AIManagement" parent="." instance=ExtResource("4_ai_management")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1

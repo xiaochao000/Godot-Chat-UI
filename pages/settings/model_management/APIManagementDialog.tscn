@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://api_mgmt_dialog_uid"]
+
+[ext_resource type="Script" path="res://pages/settings/model_management/APIManagementDialog.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://api_edit_dialog_uid" path="res://pages/settings/model_management/APIEditDialog.tscn" id="2_dialog"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="APIManagementDialog" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+script = ExtResource("1_script")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="Header" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="CloseBtn" type="Button" parent="VBoxContainer/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "<"
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+text = "管理 API"
+vertical_alignment = 1
+
+[node name="AddAPIBtn" type="Button" parent="VBoxContainer/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "+"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="APIList" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="EditDialog" parent="." instance=ExtResource("2_dialog")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1

@@ -1,0 +1,254 @@
+[gd_scene load_steps=18 format=3 uid="uid://dn6slpvc7fe7p"]
+
+[ext_resource type="Script" path="res://pages/chats/chat_messages/ChatMessages.gd" id="1_moulp"]
+[ext_resource type="PackedScene" uid="uid://82luo3c72are" path="res://components/avatar/Avatar.tscn" id="1_rmo5k"]
+[ext_resource type="FontFile" uid="uid://chn0vrpw0i4y2" path="res://assets/fonts/Roboto/Roboto-Bold.ttf" id="2_8rwvf"]
+[ext_resource type="StyleBox" uid="uid://bjoa0j5wb5g66" path="res://assets/styles/empty.tres" id="3_d32gs"]
+[ext_resource type="Texture2D" uid="uid://dd7jgyl31a7gp" path="res://assets/icons/video.svg" id="4_1ejr1"]
+[ext_resource type="Texture2D" uid="uid://cwna7ge6rq01t" path="res://assets/icons/phone.svg" id="5_442wu"]
+[ext_resource type="Texture2D" uid="uid://b6luuhgjnygb0" path="res://assets/icons/search.svg" id="6_imo0o"]
+[ext_resource type="Texture2D" uid="uid://blfvhkyi2h0xk" path="res://assets/patterns/tic-tac-toe.svg" id="7_5kfxl"]
+[ext_resource type="Theme" uid="uid://c2ke1g0gq6u4r" path="res://assets/styles/scroll_bar.tres" id="9_4fgrk"]
+[ext_resource type="PackedScene" uid="uid://d0lrk05ecisgr" path="res://pages/chats/chat_messages/message/Message.tscn" id="9_abb6j"]
+[ext_resource type="Texture2D" uid="uid://gykyvunygdod" path="res://assets/icons/lock.svg" id="10_1v77x"]
+[ext_resource type="PackedScene" uid="uid://bm8vhw76hb572" path="res://pages/chats/chat_messages/input_area/InputArea.tscn" id="12_t3hjc"]
+[ext_resource type="Texture2D" uid="uid://6rr4xuo5lt0w" path="res://assets/icons/horizontal_dots.svg" id="13_dots"]
+[ext_resource type="PackedScene" uid="uid://c6jhyw2j7n2ky" path="res://pages/chats/chat_messages/ModelSelectionPanel.tscn" id="14_model"]
+[ext_resource type="PackedScene" uid="uid://cs8p2j7f5y8v3" path="res://pages/chats/chat_messages/ChatSettingsPanel.tscn" id="15_settings"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fsay"]
+draw_center = false
+border_width_bottom = 1
+border_color = Color(0.109804, 0.109804, 0.109804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6ruq"]
+bg_color = Color(0.207843, 0.207843, 0.207843, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_7is0x"]
+color = Color(0.321569, 0.321569, 0.321569, 1)
+vertical = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gka17"]
+texture = ExtResource("7_5kfxl")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqvln"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(0.529412, 0.486275, 0.403922, 0.694118)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="ChatMessages" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+script = ExtResource("1_moulp")
+
+[node name="Header" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3fsay")
+
+[node name="MarginContainer" type="MarginContainer" parent="Header"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Header/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="BackBtn" type="Button" parent="Header/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("3_d32gs")
+theme_override_styles/hover = SubResource("StyleBoxFlat_i6ruq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_i6ruq")
+theme_override_styles/disabled = ExtResource("3_d32gs")
+theme_override_styles/focus = ExtResource("3_d32gs")
+
+[node name="Label" type="Label" parent="Header/MarginContainer/HBoxContainer/BackBtn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Contact" type="HBoxContainer" parent="Header/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
+
+[node name="ContactAvatar" parent="Header/MarginContainer/HBoxContainer/Contact" instance=ExtResource("1_rmo5k")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Header/MarginContainer/HBoxContainer/Contact"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="ContactName" type="Label" parent="Header/MarginContainer/HBoxContainer/Contact/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.815686, 0.815686, 0.815686, 1)
+theme_override_fonts/font = ExtResource("2_8rwvf")
+theme_override_font_sizes/font_size = 42
+text = "Jane Doe"
+vertical_alignment = 2
+
+[node name="ContactSubtitle" type="Label" parent="Header/MarginContainer/HBoxContainer/Contact/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_font_sizes/font_size = 28
+text = "点击查看联系人信息"
+
+[node name="ModelBtn" type="Button" parent="Header/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 70)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_qqvln")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qqvln")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qqvln")
+theme_override_fonts/font = ExtResource("2_8rwvf")
+theme_override_font_sizes/font_size = 28
+text = "G 3尊"
+
+[node name="MoreMenuBtn" type="Button" parent="Header/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("3_d32gs")
+theme_override_styles/hover = SubResource("StyleBoxFlat_i6ruq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_i6ruq")
+theme_override_styles/disabled = ExtResource("3_d32gs")
+theme_override_styles/focus = ExtResource("3_d32gs")
+
+[node name="TextureRect" type="TextureRect" parent="Header/MarginContainer/HBoxContainer/MoreMenuBtn"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_dots")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ModelSelectionPanel" parent="." instance=ExtResource("14_model")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="ChatSettingsPanel" parent="." instance=ExtResource("15_settings")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_gka17")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MessagesScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("9_4fgrk")
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/MessagesScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MessagesScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/MessagesScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+theme_override_styles/separator = ExtResource("3_d32gs")
+
+[node name="MessagesAreEncrypted" type="PanelContainer" parent="PanelContainer/VBoxContainer/MessagesScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_qqvln")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MessagesScrollContainer/MarginContainer/VBoxContainer/MessagesAreEncrypted"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/MessagesScrollContainer/MarginContainer/VBoxContainer/MessagesAreEncrypted/HBoxContainer"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+texture = ExtResource("10_1v77x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MessagesScrollContainer/MarginContainer/VBoxContainer/MessagesAreEncrypted/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "消息和通话已经过端到端加密。此聊天之外的任何人，包括 WhatsUp，都无法阅读或收听它们。"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer/MessagesScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+theme_override_styles/separator = ExtResource("3_d32gs")
+
+[node name="Messages" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MessagesScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Message" parent="PanelContainer/VBoxContainer/MessagesScrollContainer/MarginContainer/VBoxContainer/Messages" instance=ExtResource("9_abb6j")]
+layout_mode = 2
+
+[node name="ScrollDownHelper" type="HSeparator" parent="PanelContainer/VBoxContainer/MessagesScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = ExtResource("3_d32gs")
+
+[node name="InputArea" parent="PanelContainer/VBoxContainer" instance=ExtResource("12_t3hjc")]
+layout_mode = 2

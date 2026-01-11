@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsd7lt7ioq2cw"]
+
+[ext_resource type="Script" path="res://pages/status/Status.gd" id="1_2kg4s"]
+[ext_resource type="FontFile" uid="uid://chn0vrpw0i4y2" path="res://assets/fonts/Roboto/Roboto-Bold.ttf" id="2_41fjr"]
+[ext_resource type="PackedScene" uid="uid://c76ijdv05evhj" path="res://pages/status/status_list/StatusList.tscn" id="3_1oixb"]
+[ext_resource type="PackedScene" uid="uid://hy0jntm0qm2l" path="res://pages/status/StatusLanding.tscn" id="4_v7j7v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n5cu"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_color = Color(0.109804, 0.109804, 0.109804, 1)
+corner_radius_top_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enjs6"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+border_width_top = 1
+border_color = Color(0.109804, 0.109804, 0.109804, 1)
+
+[node name="Status" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+script = ExtResource("1_2kg4s")
+
+[node name="Side" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3n5cu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Side"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="Side/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+
+[node name="Header" type="HBoxContainer" parent="Side/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Side/VBoxContainer/MarginContainer/Header"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_41fjr")
+theme_override_font_sizes/font_size = 24
+text = "状态"
+
+[node name="StatusList" parent="Side/VBoxContainer" instance=ExtResource("3_1oixb")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MainContent" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_enjs6")
+
+[node name="Landing" parent="MainContent" instance=ExtResource("4_v7j7v")]
+unique_name_in_owner = true
+layout_mode = 2
